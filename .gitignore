@@ -1,0 +1,6 @@
+# editors
+.idea/
+.vscode/
+
+# export files
+export.zip

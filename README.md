@@ -1,55 +1,92 @@
-# Mintlify Starter Kit
+# Flowtag documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+This repository contains the source for Flowtag's public documentation site:
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+- Production docs: https://docs.flowtag.dev
+- Main website: https://flowtag.dev
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+The docs are built with [Mintlify](https://mintlify.com) and written in MDX.
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+## Repository structure
 
-## AI-assisted writing
+- `docs.json`: global site configuration (theme, navigation, links, branding)
+- `index.mdx`, `quickstart.mdx`, `development.mdx`: core getting started docs
+- `essentials/`: writing and customization guidance
+- `api-reference/`: API overview and endpoint examples
+- `ai-tools/`: setup guides for AI-assisted docs workflows
+- `images/` and `logo/`: static assets
+- `snippets/`: reusable documentation content
 
-Set up your AI coding tool to work with Mintlify:
+## Local development
+
+### 1. Install prerequisites
+
+- Node.js 18+
+- Mintlify CLI
+
+```bash
+npm i -g mint
+```
+
+### 2. Start the docs site
+
+From the repository root (where `docs.json` lives):
+
+```bash
+mint dev
+```
+
+Preview: http://localhost:3000
+
+## Quality checks
+
+Run these before opening a pull request:
+
+```bash
+mint broken-links
+mint validate
+```
+
+Optional accessibility check:
+
+```bash
+mint a11y
+```
+
+## Writing guidelines
+
+- Use active voice and second person.
+- Keep wording concise and practical.
+- Use sentence case for headings.
+- Prefer Mintlify components over custom HTML.
+- Update `docs.json` navigation when adding new pages.
+
+If you use AI tooling, install Mintlify's docs skill:
 
 ```bash
 npx skills add https://mintlify.com/docs
 ```
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+## Contribution workflow
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+1. Create a branch from `main`.
+2. Make documentation changes.
+3. Run local preview and quality checks.
+4. Open a pull request with a clear summary.
 
-## Development
+Production is updated by the Mintlify GitHub integration after changes are merged to `main`.
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+## Troubleshooting
 
-```
-npm i -g mint
-```
+- `mint dev` fails: run `mint update` and retry.
+- Page returns 404 locally: verify the page path is included in `docs.json` navigation.
+- Styles or config look outdated: restart `mint dev` after editing `docs.json`.
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+## Resources
 
-```
-mint dev
-```
+- Mintlify docs: https://mintlify.com/docs
+- Mintlify docs.json schema: https://mintlify.com/docs.json
 
-View your local preview at `http://localhost:3000`.
+## License
 
-## Publishing changes
-
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+This project is licensed under the terms in [LICENSE](LICENSE).

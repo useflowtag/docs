@@ -1,34 +1,95 @@
-> **Customize this file**: Tailor this template to your project by noting specific contribution types you're looking for, adding a Code of Conduct, or adjusting the writing guidelines to match your style.
+# Contributing to Flowtag Docs
 
-# Contribute to the documentation
+Thanks for helping improve Flowtag documentation.
 
-Thank you for your interest in contributing to our documentation! This guide will help you get started.
+This repository powers https://docs.flowtag.dev and is built with Mintlify.
 
-## How to contribute
+## What to contribute
 
-### Option 1: Edit directly on GitHub
+You can contribute:
 
-1. Navigate to the page you want to edit
-2. Click the "Edit this file" button (the pencil icon)
-3. Make your changes and submit a pull request
+- Fixes for unclear, outdated, or incorrect docs
+- New documentation for existing product behavior
+- API documentation improvements and examples
+- Typo, grammar, and formatting fixes
+- Better onboarding and quickstart guidance
 
-### Option 2: Local development
+## Ways to contribute
 
-1. Fork and clone this repository
-2. Install the Mintlify CLI: `npm i -g mint`
-3. Create a branch for your changes
-4. Make changes
-5. Navigate to the docs directory and run `mint dev`
-6. Preview your changes at `http://localhost:3000`
-7. Commit your changes and submit a pull request
+### Option 1: Edit on GitHub
 
-For more details on local development, see our [development guide](development.mdx).
+1. Open the page you want to update.
+2. Click the edit icon.
+3. Propose your change in a pull request.
 
-## Writing guidelines
+### Option 2: Local workflow
 
-- **Use active voice**: "Run the command" not "The command should be run"
-- **Address the reader directly**: Use "you" instead of "the user"
-- **Keep sentences concise**: Aim for one idea per sentence
-- **Lead with the goal**: Start instructions with what the user wants to accomplish
-- **Use consistent terminology**: Don't alternate between synonyms for the same concept
-- **Include examples**: Show, don't just tell
+1. Fork and clone the repository.
+2. Install Mintlify CLI.
+3. Create a branch from main.
+4. Make your changes.
+5. Run local preview and checks.
+6. Open a pull request.
+
+## Local setup
+
+Install Mintlify CLI:
+
+```bash
+npm i -g mint
+```
+
+Start local preview from the repository root:
+
+```bash
+mint dev
+```
+
+Preview URL: http://localhost:3000
+
+## Pull request checklist
+
+Before submitting your PR, run:
+
+```bash
+mint broken-links
+mint validate
+```
+
+If your change affects layout, semantics, or major page structure, also run:
+
+```bash
+mint a11y
+```
+
+## Writing standards
+
+- Use active voice and second person.
+- Keep sentences concise and direct.
+- Use sentence case for headings.
+- Lead with user intent, then provide steps.
+- Prefer practical examples over abstract explanation.
+- Keep terminology consistent across pages.
+
+## Content conventions
+
+- Add frontmatter with at least title and description on MDX pages.
+- Use Mintlify components when they improve clarity.
+- Store image assets in the images directory.
+- Add new pages to docs.json navigation so they appear in the sidebar.
+
+## Review expectations
+
+- Keep PRs focused on one change area when possible.
+- Include a short summary of what changed and why.
+- Link related issues or context when relevant.
+- Be responsive to review feedback.
+
+## Community expectations
+
+Be respectful, constructive, and collaborative in issues and pull requests.
+
+## Need help
+
+- Open an issue in this repository for docs bugs or gaps.
+- For Mintlify platform details, see https://mintlify.com/docs.
