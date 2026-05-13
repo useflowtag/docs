@@ -9,12 +9,12 @@ const config = {
     return [
       {
         source: "/docs",
-        destination: "/core",
+        destination: "/core/quickstart",
         permanent: false
       },
       {
         source: "/",
-        destination: "/core",
+        destination: "/core/quickstart",
         permanent: false
       }
     ]
