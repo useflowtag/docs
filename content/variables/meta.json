@@ -2,5 +2,10 @@
   "root": true,
   "title": "Variables",
   "description": "Learn how to use Flowtag Variables",
-  "icon": "Braces"
+  "icon": "Braces",
+  "pages": [
+    "overview",
+    "history",
+    "tokens"
+  ]
 }
