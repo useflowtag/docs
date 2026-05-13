@@ -3,11 +3,9 @@
   to = "/core/quickstart"
   status = 200 # temporary redirect
   force = false
-  query = {path = ":path"}
 
 [[redirects]]
   from = "/docs"
   to = "/core/quickstart"
   status = 200 # temporary redirect
   force = false
-  query = {path = ":path"}
