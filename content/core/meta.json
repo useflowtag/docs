@@ -1,0 +1,7 @@
+{
+  "root": true,
+  "title": "Core",
+  "description": "Learn Flowtag's fundamental concepts.",
+  "icon": "Cpu",
+  "pages": ["quickstart", "api-keys"]
+}

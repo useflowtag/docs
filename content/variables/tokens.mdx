@@ -1,0 +1,48 @@
+﻿---
+title: Tokens
+description: "Create access tokens to read variables from your apps."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## What is a token?
+
+A **token** is a UUID credential that authorises external read access to one or more variables. Tokens are scoped per organisation and can be restricted to a specific set of variables.
+
+<Callout type="warn">
+  Tokens grant **read-only** access. They cannot be used to create, update, or delete variables.
+</Callout>
+
+## Creating a token
+
+1. Go to **Variables -> Tokens** in the Dashboard.
+2. Click **New token**.
+3. Enter a **name** (slug format, e.g. `my-app-prod`).
+4. Choose which variables the token can access:
+   - **All variables** — the token can read any variable in the organisation.
+   - **Specific variables** — select individual variables from the list.
+5. Click **Create**.
+
+## Rotating a token
+
+Rotation replaces the token string while preserving its name and permissions. The old string is immediately invalidated.
+
+1. Open the token's options menu (...).
+2. Click **Rotate**.
+3. Copy the new token string.
+
+## Revoking a token
+
+Revoking permanently deletes the token. Any requests using that token will receive a `401 Unauthorized` response.
+
+1. Open the token's options menu (...).
+2. Click **Revoke**.
+3. Confirm the action.
+
+## Using a token
+
+Pass the token as a query parameter when calling the Variables API:
+
+```bash
+curl "https://variables.flowtagservices.com/v1/value/YOUR_VARIABLE_ID?token=YOUR_TOKEN"
+```

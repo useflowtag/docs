@@ -1,0 +1,145 @@
+---
+title: "@flowtag/variables"
+description: "JavaScript SDK for reading Flowtag Variables."
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+The `@flowtag/variables` package provides a typed client for reading [Flowtag Variables](/variables/overview) from any JavaScript or TypeScript environment — Node.js, edge runtimes, or the browser.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm', 'yarn', 'bun']}>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @flowtag/variables
+    ```
+  </Tab>
+  <Tab value="npm">
+    ```bash
+    npm install @flowtag/variables
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @flowtag/variables
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @flowtag/variables
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## `createClient(token)`
+
+Create a client bound to an access token. Create your token in the Dashboard under **Variables → Tokens**.
+
+```ts
+import { createClient } from "@flowtag/variables";
+
+const client = createClient("YOUR_TOKEN");
+```
+
+| Parameter | Type | Description |
+|---|---|---|
+| `token` | `string` | **Required.** Access token created in the Dashboard. |
+
+<Callout type="warn">
+  Never expose your token in client-side code. Read the security note in the [Tokens](/variables/tokens) docs.
+</Callout>
+
+---
+
+### `.getVariable(id)`
+
+Fetch the value of a variable by its ID.
+
+```ts
+const value = await createClient("YOUR_TOKEN").getVariable("VARIABLE_ID");
+```
+
+Pass a type parameter for a typed result:
+
+```ts
+// toggle → boolean
+const showBanner = await createClient("YOUR_TOKEN").getVariable<boolean>("VARIABLE_ID");
+
+// json → your type
+const config = await createClient("YOUR_TOKEN").getVariable<{ limit: number; enabled: boolean }>("VARIABLE_ID");
+```
+
+| Parameter | Type | Description |
+|---|---|---|
+| `id` | `string` | The variable ID from the Dashboard. |
+
+Returns `Promise<T>` — the variable's value cast to `T`.
+
+---
+
+### `.getVariableMeta(id)`
+
+Fetch metadata for a variable without its value.
+
+```ts
+const meta = await createClient("YOUR_TOKEN").getVariableMeta("VARIABLE_ID");
+
+console.log(meta.name, meta.type, meta.updatedAt);
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | `string` | Variable ID. |
+| `name` | `string` | Variable name. |
+| `type` | `"toggle" \| "json"` | Variable type. |
+| `digest` | `string` | Hash of the current value — useful for cache invalidation. |
+| `updatedAt` | `number` | Unix timestamp of the last update. |
+
+---
+
+### `.getSchema(id)`
+
+Fetch the JSON schema for a `json`-type variable.
+
+```ts
+const schema = await createClient("YOUR_TOKEN").getSchema("VARIABLE_ID");
+```
+
+Returns `Promise<Record<string, unknown>>` — the variable's JSON schema.
+
+---
+
+## `getVariable(id)`
+
+A standalone export that reads the token from the `FLOWTAG_VARIABLES_TOKEN` environment variable. Useful in server environments where the token is already set.
+
+```ts
+import { getVariable } from "@flowtag/variables";
+
+const showBanner = await getVariable<boolean>("VARIABLE_ID");
+```
+
+Equivalent to `createClient(process.env.FLOWTAG_VARIABLES_TOKEN).getVariable(id)`.
+
+---
+
+## Example
+
+```ts
+import { createClient } from "@flowtag/variables";
+
+const client = createClient(process.env.FLOWTAG_VARIABLES_TOKEN!);
+
+const showBanner = await client.getVariable<boolean>("VARIABLE_ID");
+const config = await client.getVariable<{ limit: number }>("VARIABLE_ID");
+
+console.log(showBanner, config);
+```
+
+<Callout>
+  Store your token in an environment variable and never commit it to source control.
+</Callout>

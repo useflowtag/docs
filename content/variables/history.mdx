@@ -1,0 +1,30 @@
+---
+title: History
+description: "View and restore previous values of a variable."
+icon: "clock-rotate-left"
+---
+
+## What is variable history?
+
+Every time a variable's value changes, Flowtag records a **history entry** containing the previous value, the time of the change, and (for `json` variables) the schema at that point.
+
+History lets you:
+- Audit who changed a variable and when.
+- Inspect the exact value at any point in the past.
+- Roll back to a previous value with one click.
+
+## Viewing history
+
+Open a variable in the Dashboard and click the **History** tab. Entries are listed newest-first, 10 per page. Each entry shows:
+
+- **Timestamp** — when the value was changed.
+- **Value** — the value at that point (expandable).
+- **Schema** — the JSON schema at that point (for `json` variables).
+
+## Restoring a value
+
+1. Find the history entry you want to restore.
+2. Click **Restore** on that entry.
+3. Confirm the action.
+
+Restoring creates a new history entry rather than rewriting history, so the rollback itself is auditable.

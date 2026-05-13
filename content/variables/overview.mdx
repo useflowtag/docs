@@ -1,0 +1,42 @@
+﻿---
+title: Overview
+description: "Manage feature flags and remote config values across your apps."
+---
+
+import { Cards, Card } from 'fumadocs-ui/components/card';
+
+## What are variables?
+
+**Variables** are named configuration values hosted by Flowtag and fetched by your apps at runtime. Instead of re-deploying to change a feature flag or a config value, you update it in the Dashboard and your app picks it up on the next read.
+
+Variables are served by an edge worker (Cloudflare Workers) with a KV cache in front of Postgres, giving you sub-5 ms reads globally.
+
+## Variable types
+
+| Type | Description | Example value |
+|---|---|---|
+| `toggle` | A boolean feature flag. | `true` / `false` |
+| `json` | Any structured JSON value. | `{ "limit": 100, "enabled": true }` |
+
+## Creating a variable
+
+1. In the Dashboard, go to **Variables** and click **New variable**.
+2. Enter a **key** (slug format, e.g. `show-banner`).
+3. Select the **type** — `toggle` or `json`.
+4. Set the initial **value**.
+5. Click **Create**.
+
+## Access control
+
+Variables are private by default. You must create an **access token** to read a variable from outside the Dashboard. See [Tokens](/variables/tokens).
+
+## Next steps
+
+<Cards>
+  <Card title="Tokens" href="/variables/tokens">
+    Create and manage access tokens for your variables.
+  </Card>
+  <Card title="History" href="/variables/history">
+    View and restore previous values.
+  </Card>
+</Cards>

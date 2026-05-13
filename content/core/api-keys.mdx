@@ -1,0 +1,35 @@
+﻿---
+title: API keys
+icon: "KeyRound"
+description: "Authenticate server-side requests to the Flowtag API."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## What is an API key?
+
+**API keys** authenticate requests from your servers to the Flowtag management API (as opposed to [Variables tokens](/variables/tokens), which authenticate read-only access to individual variables).
+
+<Callout>
+  API keys grant broad access to your organisation's data. Keep them secret and out of client-side code.
+</Callout>
+
+## Creating an API key
+
+1. Go to **Settings -> API Keys** in the Dashboard.
+2. Click **New API key** and enter a name.
+3. Copy the key string — it is shown only once.
+
+## Rotating an API key
+
+Rotation generates a new key string immediately. The old string stops working as soon as you confirm.
+
+1. Open the key's options menu (...).
+2. Click **Rotate** and confirm.
+3. Update the key in all services that use it.
+
+## Revoking an API key
+
+1. Open the key's options menu (...).
+2. Click **Revoke**.
+3. Type the key name to confirm and click **Revoke**.

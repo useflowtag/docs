@@ -1,0 +1,86 @@
+﻿---
+title: Quickstart
+description: "Get up and running with Flowtag in minutes."
+icon: "Rocket"
+---
+
+import { Cards, Card } from 'fumadocs-ui/components/card';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+
+## 1. Create an account
+
+Go to [flowtag.dev](https://flowtag.dev/?ref=docs.quickstart) and sign up. After signing in you will land on the **Dashboard**.
+
+## 2. Add analytics to your website
+
+<Steps>
+  <Step>
+    ### Create a tracker
+    In the Dashboard, open **Trackers** and click **New tracker**. Give it a name and enter your website's domain (e.g. `example.com`).
+  </Step>
+  <Step>
+    ### Install the snippet
+    Copy the snippet from the **Connect** dialog and paste it into the `<head>` of every page you want to track.
+
+    ```html
+    <script
+      src="https://beacon.flowtagservices.com/tag.js"
+      defer
+      async
+      data-ft="YOUR_TRACKER_ID"
+      data-debug="false"
+      data-gtagsync="true"
+      data-auto-init="true"
+      data-base-url="https://beacon.flowtagservices.com"
+    ></script>
+    ```
+  </Step>
+  <Step>
+    ### Verify
+    Click **Check your website** in the Connect dialog to confirm the tag is live.
+  </Step>
+</Steps>
+
+## 3. Add a remote config variable
+
+<Steps>
+  <Step>
+    ### Create a variable
+    Open **Variables** in the Dashboard and click **New variable**. Choose a key (e.g. `show-banner`) and a type — **Toggle** for a boolean flag or **JSON** for structured config.
+  </Step>
+  <Step>
+    ### Create an access token
+    Go to **Variables -> Tokens** and create a new token. Choose which variables it can access.
+  </Step>
+  <Step>
+    ### Fetch the variable
+    Call the Variables edge API from your app:
+
+    ```bash
+    curl "https://variables.flowtagservices.com/v1/value/YOUR_VARIABLE_ID?token=YOUR_TOKEN"
+    ```
+
+    Response:
+
+    ```json
+    {
+      "id": "YOUR_VARIABLE_ID",
+      "name": "show-banner",
+      "type": "toggle",
+      "digest": "abc123",
+      "value": true
+    }
+    ```
+  </Step>
+</Steps>
+
+## Next steps
+
+<Cards>
+  <Card title="Trackers" href="/trackers/overview">
+    Learn about tracker options and how to interpret your analytics data.
+  </Card>
+  <Card title="Variables" href="/variables/overview">
+    Explore variable types, history, tokens, and the full API reference.
+  </Card>
+</Cards>

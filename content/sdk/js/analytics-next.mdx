@@ -1,0 +1,154 @@
+﻿---
+title: "@flowtag/next"
+description: "Flowtag tracking adapter for Next.js."
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+The `@flowtag/next` package provides a `<Flowtag />` component that loads the tracking tag using Next.js's `<Script />` primitive, plus a typed client API that wraps `window.flowtag`.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm', 'yarn', 'bun']}>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @flowtag/next
+    ```
+  </Tab>
+  <Tab value="npm">
+    ```bash
+    npm install @flowtag/next
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @flowtag/next
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @flowtag/next
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## \<Flowtag /\>
+
+Add the component once in your root layout. It renders a Next.js `<Script />` tag with the correct attributes.
+
+```tsx app/layout.tsx
+import { Flowtag } from "@flowtag/next";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Flowtag trackerId="YOUR_TRACKER_ID" />
+      </body>
+    </html>
+  );
+}
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `trackerId` | `string` | -- | **Required.** Your tracker ID from the Dashboard. |
+| `debug` | `boolean` | `false` | Log tracking events to the browser console. |
+| `syncWithGoogleTag` | `boolean` | `true` | Sync consent state with Google Tag Manager. |
+| `autoInit` | `boolean` | `true` | Automatically start a session on page load. |
+| `baseUrl` | `string` | `https://beacon.flowtagservices.com` | Beacon endpoint. Leave as default unless self-hosting. |
+
+---
+
+## Client API
+
+Import `flowtag` and call it from client components or browser code. All methods proxy to `window.flowtag` set up by the tag.
+
+```ts
+import { flowtag } from "@flowtag/next";
+```
+
+### `flowtag.consentCookies(consent)`
+
+Grant or revoke cookie consent. When consent is `false`, Flowtag operates in cookieless mode.
+
+```ts
+// User accepted cookies
+flowtag.consentCookies(true);
+
+// User declined
+flowtag.consentCookies(false);
+```
+
+### `flowtag.getConsent()`
+
+Returns the current consent state as a boolean.
+
+```ts
+const hasConsent: boolean = flowtag.getConsent();
+```
+
+### `flowtag.capture(eventName, eventData?)`
+
+Capture a custom event with an optional payload.
+
+```ts
+flowtag.capture("signup_completed", { plan: "pro" });
+flowtag.capture("button_clicked");
+```
+
+### `flowtag.getConfig(key?)`
+
+Get the current tracker config. Pass a key to read a single field.
+
+```ts
+const config = flowtag.getConfig();            // full config object
+const id     = flowtag.getConfig("trackerId"); // single field
+```
+
+### `flowtag.setConfig(key, value)`
+
+Update a config value at runtime.
+
+```ts
+flowtag.setConfig("debug", true);
+```
+
+---
+
+## Cookie consent pattern
+
+A common pattern is to show a cookie banner and set consent based on the user's choice:
+
+```tsx
+"use client";
+import { flowtag } from "@flowtag/next";
+
+export function CookieBanner() {
+  function accept() {
+    flowtag.consentCookies(true);
+  }
+
+  function decline() {
+    flowtag.consentCookies(false);
+  }
+
+  return (
+    <div>
+      <p>We use cookies to improve your experience.</p>
+      <button onClick={accept}>Accept</button>
+      <button onClick={decline}>Decline</button>
+    </div>
+  );
+}
+```
+
+```tsx app/layout.tsx
+<Flowtag trackerId="YOUR_TRACKER_ID" />
+<CookieBanner />
+```

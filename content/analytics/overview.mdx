@@ -1,0 +1,44 @@
+﻿---
+title: Overview
+description: "Track visitors and events on your website with a single script tag."
+---
+
+import { Cards, Card } from 'fumadocs-ui/components/card';
+
+## What is a tracker?
+
+A **tracker** is a Flowtag analytics project tied to one website domain. Each tracker has a unique ID used by the JavaScript tag to attribute sessions to the right property.
+
+Trackers collect:
+
+- **Sessions** — open/closed visitor sessions with timestamps
+- **Pages** — the paths visitors land on
+- **Devices** — browser, OS, and device type
+- **Geography** — country derived from IP (hashed for privacy)
+- **Referrers** — where traffic came from
+- **Tags** — custom metadata you attach to sessions
+
+## Tracker status
+
+| Status | Description |
+|---|---|
+| `active` | Collecting data normally. |
+| `paused` | Tag is ignored; no new sessions are recorded. |
+| `suspended` | Disabled by Flowtag for policy reasons. |
+
+## Creating a tracker
+
+1. In the Dashboard, go to **Trackers** and click **New tracker**.
+2. Enter a **name** (slug format, e.g. `my-site`) and the **domain** of the website you are tracking.
+3. Click **Create**.
+
+## Next steps
+
+<Cards>
+  <Card title="Installation" href="/trackers/installation">
+    Add the Flowtag tag to your website.
+  </Card>
+  <Card title="Settings" href="/trackers/settings">
+    Update your tracker name, domain, or delete it.
+  </Card>
+</Cards>
