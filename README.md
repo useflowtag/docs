@@ -1,6 +1,7 @@
 # Flowtag Docs
 
 Documentation site for Flowtag, built with Next.js and Fumadocs.
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/498f54c4-fae5-4814-a023-f0dc77208f5e/deploy-status)](https://app.netlify.com/projects/flowtagdocs/deploys)
 
 ## What’s Included
