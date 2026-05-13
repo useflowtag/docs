@@ -1,0 +1,15 @@
+[[redirects]]
+  from = "/"
+  to = "/core/quickstart"
+  status = 307 # temporary redirect
+  force = false
+  query = {path = ":path"} #  apply this rule for /old-path?path=example
+  conditions = {Language = ["en","es"], Country = ["US"]}
+
+[[redirects]]
+  from = "/docs"
+  to = "/core/quickstart"
+  status = 307 # temporary redirect
+  force = false
+  query = {path = ":path"} #  apply this rule for /old-path?path=example
+  conditions = {Language = ["en","es"], Country = ["US"]}
