@@ -1,45 +1,86 @@
-# .
+# Flowtag Docs
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+Documentation site for Flowtag, built with Next.js and Fumadocs.
 
-Run development server:
+## What’s Included
+
+This repository contains the public docs experience for Flowtag, including:
+
+- A docs layout powered by Fumadocs UI.
+- MDX-based documentation content under `content/`.
+- Search, LLM, and Open Graph routes for the docs site.
+- Shared layout and content loading helpers in `lib/`.
+
+## Requirements
+
+- Node.js 20 or newer
+- pnpm 9 or newer
+
+## Getting Started
+
+Install dependencies:
 
 ```bash
-npm run dev
-# or
-pnpm dev
-# or
-yarn dev
+pnpm install
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Run the development server:
 
-## Explore
+```bash
+pnpm dev
+```
 
-In the project, you can see:
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
+## Common Scripts
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+```bash
+pnpm dev         # Start the local development server
+pnpm build       # Build the production app
+pnpm start       # Start the production server
+pnpm types:check # Generate MDX types and run TypeScript checks
+pnpm lint        # Check and fix code with Biome
+pnpm format      # Format the repository with Biome
+```
 
-### Fumadocs MDX
+## Project Structure
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+- `app/` - Next.js app routes, layouts, and special endpoints.
+- `content/` - Docs content written in MDX and organized by section.
+- `components/` - Shared UI and MDX component mappings.
+- `lib/` - Source loading, shared layout config, and utility helpers.
+- `source.config.ts` - Fumadocs MDX configuration.
 
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+## Documentation Sections
 
-## Learn More
+The docs navigation is organized into four top-level sections:
 
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
+- `Core` - fundamentals and setup, including quickstart and API keys.
+- `Analytics` - Flowtag Analytics documentation.
+- `Variables` - Flowtag Variables documentation.
+- `SDKs` - integration guides for the Flowtag SDKs.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+## Important Routes
+
+- `/` and `/docs` redirect to the core docs section.
+- `/api/search` provides docs search.
+- `/llms.txt` and `/llms-full.txt` expose LLM-friendly documentation indexes.
+- `/llms.mdx/docs/...` serves per-page markdown content for docs pages.
+- `/og/docs/...` generates documentation Open Graph images.
+
+## Content Workflow
+
+Docs pages live in `content/**/**/*.mdx`, with section metadata in each folder’s `meta.json` file.
+
+If you add or rename pages, run:
+
+```bash
+pnpm types:check
+```
+
+This refreshes the generated MDX types and verifies the project compiles cleanly.
+
+## Useful References
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Fumadocs Documentation](https://fumadocs.dev)
