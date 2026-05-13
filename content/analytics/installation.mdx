@@ -1,15 +1,40 @@
 ﻿---
 title: Installation
-description: "Add the Flowtag tracking tag to your website."
+description: "Install your Flowtag tracking snippet from the Dashboard UI."
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Steps, Step } from 'fumadocs-ui/components/steps';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-## The snippet
+## Before you start
 
-Paste this into the `<head>` of every page you want to track. Replace `YOUR_TRACKER_ID` with the ID shown in your tracker's **Connect** dialog.
+You will need:
+
+- A created tracker in Flowtag Analytics
+- Access to your website code, CMS, or tag manager
+- Your production domain configured in tracker settings
+
+## Get the snippet from the Dashboard
+
+Always copy the snippet directly from the Flowtag UI.
+
+<Steps>
+  <Step>
+    ### Open your tracker
+    In the Flowtag Dashboard, go to **Analytics**, then open the tracker you want to install.
+  </Step>
+  <Step>
+    ### Open Connect
+    Click **Connect**.
+  </Step>
+  <Step>
+    ### Copy snippet
+    In the install dialog, click **Copy snippet**.
+  </Step>
+</Steps>
+
+The copied snippet looks like this:
 
 ```html
 <script
@@ -24,21 +49,17 @@ Paste this into the `<head>` of every page you want to track. Replace `YOUR_TRAC
 ></script>
 ```
 
-## Attributes
+<Callout>
+  The snippet is generated in the UI for your tracker. Do not hardcode or reuse another tracker's `data-ft` value.
+</Callout>
 
-| Attribute | Required | Default | Description |
-|---|---|---|---|
-| `data-ft` | Yes | -- | Your tracker ID. |
-| `data-debug` | No | `false` | When `true`, the tag logs debug information to the browser console. |
-| `data-gtagsync` | No | `true` | Syncs consent state with Google Tag Manager. Recommended if you use GTM. |
-| `data-auto-init` | No | `true` | Automatically starts a session when the page loads. Set to `false` if you want to call `flowtag.init()` manually. |
-| `data-base-url` | No | -- | The beacon endpoint. Do not change this value. |
+## Install the snippet on your site
 
-## Framework guides
+Install the snippet once per page load. For most sites, that means adding it in your global layout, theme, or site-wide header/footer include.
 
 <Tabs items={['Next.js', 'HTML', 'Shopify', 'WordPress']}>
   <Tab value="Next.js">
-    Use the [`@flowtag/next`](/sdk/js/analytics-nextjs) package for a typed React component instead of a raw script tag.
+    Use the [`@flowtag/next`](/sdk/js/analytics-nextjs) package for a typed React component.
 
     ```bash
     pnpm add @flowtag/next
@@ -61,23 +82,16 @@ Paste this into the `<head>` of every page you want to track. Replace `YOUR_TRAC
     }
     ```
 
-    See the [SDK docs](/sdk/js/analytics-nextjs) for all props and the client API.
+    Find the tracker ID in **Connect**, or paste the generated script snippet instead if you prefer script-based install.
   </Tab>
   <Tab value="HTML">
+    Paste the generated snippet before `</head>` or `</body>` in your global template:
+
     ```html
     <!DOCTYPE html>
     <html>
       <head>
-        <script
-          src="https://beacon.flowtagservices.com/tag.js"
-          defer
-          async
-          data-ft="YOUR_TRACKER_ID"
-          data-debug="false"
-          data-gtagsync="true"
-          data-auto-init="true"
-          data-base-url="https://beacon.flowtagservices.com"
-        ></script>
+        <!-- Flowtag snippet from Connect -->
       </head>
       <body>...</body>
     </html>
@@ -87,81 +101,71 @@ Paste this into the `<head>` of every page you want to track. Replace `YOUR_TRAC
     <Steps>
       <Step>
         ### Open your theme code
-        In your Shopify admin, go to **Online Store -> Themes**. Find your active theme, click **Actions -> Edit code**.
+        In Shopify admin, go to **Online Store -> Themes**. In your active theme, click **Actions -> Edit code**.
       </Step>
       <Step>
         ### Open theme.liquid
-        In the **Layout** folder, click **theme.liquid**.
+        In **Layout**, open `theme.liquid`.
       </Step>
       <Step>
-        ### Insert the snippet
-        Paste the snippet just before the closing `</body>` tag:
-
-        ```html
-        <script
-          src="https://beacon.flowtagservices.com/tag.js"
-          defer
-          async
-          data-ft="YOUR_TRACKER_ID"
-          data-debug="false"
-          data-gtagsync="true"
-          data-auto-init="true"
-          data-base-url="https://beacon.flowtagservices.com"
-        ></script>
-        ```
+        ### Paste snippet
+        Paste your copied snippet right before `</body>`.
       </Step>
       <Step>
         ### Save
-        Click **Save**. The tag is now active on every page of your store.
+        Click **Save**.
       </Step>
     </Steps>
   </Tab>
   <Tab value="WordPress">
     <Steps>
       <Step>
-        ### Install the plugin
-        In your WordPress dashboard (`/wp-admin`), go to **Plugins -> Add New** and search for **Insert HTML Snippet**. Install and activate it.
-
-        [Plugin page](https://wordpress.org/plugins/insert-html-snippet/)
+        ### Install a header/footer snippet plugin
+        In WordPress admin, go to **Plugins -> Add New** and install a snippet plugin (for example, **Insert Headers and Footers**).
       </Step>
       <Step>
-        ### Add a new snippet
-        Go to **HTML Snippets -> Add New** in the sidebar.
+        ### Paste snippet
+        Paste the Flowtag snippet from **Connect** into the site-wide header or footer script box.
       </Step>
       <Step>
-        ### Configure the snippet
-        Fill in the fields as follows:
-
-        - **Placement method**: Automatic
-        - **Insertion location**: Footer (front end)
-        - **Tracking name**: Flowtag (or any name you prefer)
-        - **HTML Snippet**:
-
-        ```html
-        <script
-          src="https://beacon.flowtagservices.com/tag.js"
-          defer
-          async
-          data-ft="YOUR_TRACKER_ID"
-          data-debug="false"
-          data-gtagsync="true"
-          data-auto-init="true"
-          data-base-url="https://beacon.flowtagservices.com"
-        ></script>
-        ```
-      </Step>
-      <Step>
-        ### Save
-        Click **Save**. The tag will load on every page of your site.
+        ### Save and publish
+        Save your changes so the script loads on all pages.
       </Step>
     </Steps>
   </Tab>
 </Tabs>
 
+## Snippet attributes
+
+| Attribute | Required | Default | Description |
+|---|---|---|---|
+| `data-ft` | Yes | -- | Your tracker ID. |
+| `data-debug` | No | `false` | When `true`, the tag logs debug information to the browser console. |
+| `data-gtagsync` | No | `true` | Syncs consent state with Google Tag Manager. Recommended if you use GTM. |
+| `data-auto-init` | No | `true` | Automatically starts a session when the page loads. Set to `false` if you want to call `flowtag.init()` manually. |
+| `data-base-url` | No | -- | The beacon endpoint. Do not change this value. |
+
 ## Verifying the tag
 
-After installing the snippet, open the tracker in your Dashboard and click **Connect**. Then click **Check your website** — Flowtag will attempt to detect the tag on your domain.
+After publishing the snippet, verify installation from the same **Connect** dialog:
+
+1. Open your tracker and click **Connect**.
+2. Click **Check your website**.
+3. Confirm the tracker is detected.
+
+You can also verify in browser DevTools:
+
+- Open your site and go to **Network**.
+- Filter for `beacon.flowtagservices.com`.
+- Reload the page and confirm requests are sent.
 
 <Callout>
-  If your site dynamically loads scripts, the check may not detect the tag even when it's working correctly. If sessions appear in your dashboard, the tag is active.
+  If your site injects scripts dynamically, checker detection may fail even when tracking works. Live sessions in your Flowtag dashboard are the source of truth.
 </Callout>
+
+## Common mistakes
+
+- Installing the snippet on only one page instead of the global layout/template
+- Copying a tracker ID from another environment (staging vs production)
+- Caching/CDN delays after publishing theme or template changes
+- Content Security Policy blocking `beacon.flowtagservices.com`

@@ -2,5 +2,6 @@
   "root": true,
   "title": "Analytics",
   "description": "Learn how to use Flowtag Analytics",
-  "icon": "ChartArea"
+  "icon": "ChartArea",
+  "pages": ["overview", "installation", "settings"]
 }
