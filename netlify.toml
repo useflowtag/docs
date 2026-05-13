@@ -1,11 +1,11 @@
 [[redirects]]
   from = "/"
   to = "/core/quickstart"
-  status = 200 # temporary redirect
+  status = 307 # temporary redirect
   force = false
 
 [[redirects]]
   from = "/docs"
   to = "/core/quickstart"
-  status = 200 # temporary redirect
+  status = 307 # temporary redirect
   force = false
