@@ -26,6 +26,34 @@ Variables are served by our fast infrastructure, giving you sub-5 ms reads globa
 4. Set the initial **value**.
 5. Click **Create**.
 
+## Example
+
+Fetch a variable from your app using its ID and an access token:
+
+```ts
+const res = await fetch(
+  `https://variables.flowtagservices.com/v1/value/YOUR_VARIABLE_ID?token=YOUR_TOKEN`
+);
+const variable = await res.json();
+```
+
+For a **toggle**:
+
+```ts
+if (variable.value === true) {
+  // feature is enabled
+}
+```
+
+For a **JSON** variable:
+
+```ts
+const config = variable.value;
+// e.g. { "limit": 100, "enabled": true }
+```
+
+The easiest way to read variables is via the SDK. See the [SDK Introduction](/sdk/introduction).
+
 ## Access control
 
 Variables are private by default. You must create an **access token** to read a variable from outside the Dashboard. See [Tokens](/variables/tokens).
