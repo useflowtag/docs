@@ -7,11 +7,11 @@
     "build": "next build",
     "dev": "next dev",
     "start": "next start",
-    "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
+    "typecheck": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
-    "lint": "biome check --write",
-    "lint:links": "tsx scripts/broken-links.ts",
-    "format": "biome format --write"
+    "lint": "biome check",
+    "fmt": "biome check --write",
+    "lint:ci": "biome check"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.12",
@@ -19,10 +19,10 @@
     "@radix-ui/react-presence": "^1.1.5",
     "@radix-ui/react-scroll-area": "^1.2.10",
     "class-variance-authority": "^0.7.1",
-    "fumadocs-core": "16.8.10",
+    "fumadocs-core": "16.8.11",
     "fumadocs-mdx": "15.0.4",
-    "fumadocs-ui": "16.8.10",
-    "lucide-react": "^1.14.0",
+    "fumadocs-ui": "16.8.11",
+    "lucide-react": "^1.16.0",
     "next": "16.2.6",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
@@ -39,7 +39,7 @@
     "next-validate-link": "^1.6.6",
     "postcss": "^8.5.14",
     "tailwindcss": "^4.3.0",
-    "tsx": "^4.21.0",
+    "tsx": "^4.22.0",
     "typescript": "^6.0.3"
   }
 }
