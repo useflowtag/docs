@@ -3,9 +3,5 @@
   "title": "Variables",
   "description": "Learn how to use Flowtag Variables",
   "icon": "Braces",
-  "pages": [
-    "overview",
-    "history",
-    "tokens"
-  ]
+  "pages": ["overview", "history", "tokens"]
 }

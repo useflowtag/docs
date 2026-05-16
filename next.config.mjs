@@ -10,15 +10,15 @@ const config = {
       {
         source: "/docs",
         destination: "/core/quickstart",
-        permanent: false
+        permanent: false,
       },
       {
         source: "/",
         destination: "/core/quickstart",
-        permanent: false
-      }
-    ]
-  }
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default withMDX(config);
