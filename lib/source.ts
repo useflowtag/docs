@@ -1,6 +1,7 @@
 import { docs } from "collections/server";
 import { loader } from "fumadocs-core/source";
 import { lucideIconsPlugin } from "fumadocs-core/source/plugins/lucide-icons";
+import type { DistributiveOmit, OperationOutput, PagesBuilder, WebhookOutput } from "fumadocs-openapi";
 import { openapiPlugin, openapiSource } from "fumadocs-openapi/server";
 import { openapi } from "./openapi";
 import { docsContentRoute, docsImageRoute, docsRoute } from "./shared";
@@ -11,14 +12,19 @@ export const source = loader(
     docs: docs.toFumadocsSource(),
     openapi: await openapiSource(openapi, {
       baseDir: "reference",
-      name(output) {
-        const slug = output.item.path
+      name(output: DistributiveOmit<OperationOutput | WebhookOutput, "path">, document: PagesBuilder["document"]["dereferenced"]) {
+        const prefix = (document.info?.title ?? "api")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "");
+        const itemPath = output.type === "operation" ? output.item.path : output.item.name;
+        const slug = itemPath
           .split("/")
-          .filter((s) => s && !/^v\d+$/.test(s))
-          .map((s) => s.replace(/\{[^}]+\}/g, ""))
+          .filter((s: string) => s && !/^v\d+$/.test(s))
+          .map((s: string) => s.replace(/\{[^}]+\}/g, ""))
           .filter(Boolean)
           .join("-");
-        return `variables/${output.item.method}-${slug}`;
+        return `${prefix}/${output.item.method}-${slug}`;
       },
     }),
   },
